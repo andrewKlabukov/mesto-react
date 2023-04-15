@@ -1,8 +1,18 @@
 import React from 'react';
-import avatarImg from '../images/kusto.jpg'
+import avatarImg from '../images/kusto.jpg';
+import api from '../utils/Api';
 
-function Main(props) {  
+function Main(props) { 
   
+  Promise.all([
+    api.getUserInfo()
+  ])
+
+  const [userName, setUserName] = React.useState();
+  const [userDescription, setUserDescription] = React.useState();
+  const [userAvatar, setUserAvatar] = React.useState();
+  const [cards, setCards] = React.useState([]);
+
   return (
     <main className="main">
       <section className="profile">

@@ -1,4 +1,5 @@
 import { data } from "autoprefixer";
+import { address, token } from "./constants";
 
 class Api {
   constructor(address, token) {
@@ -57,4 +58,6 @@ class Api {
   } 
 }
 
-export { Api }
+const api = new Api(address, token);
+
+export default api;
