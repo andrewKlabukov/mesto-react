@@ -10,11 +10,13 @@ function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
+  const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({})
   
 
   const handleCardClick = (card)=> {
-    console.log(card)
+    setImagePopupOpen(true)
+    setSelectedCard(card);    
   }
   const handleEditAvatarClick = ()=> {
     setEditAvatarPopupOpen(true)    
@@ -29,7 +31,8 @@ function App() {
   const closeAllPopups = ()=> {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
-    setAddPlacePopupOpen(false);    ;
+    setAddPlacePopupOpen(false);   ;
+    setImagePopupOpen(false);   ;
   }
   
   return (
@@ -109,7 +112,7 @@ function App() {
           </form>
         </div>
       </div>
-      <ImagePopup/>
+      <ImagePopup onCardClick={handleCardClick} card={selectedCard} onClose={closeAllPopups} isOpen={isImagePopupOpen} title={`image`}/>
       {/* <div className="popup popup_type_image">
         <div className="popup__container popup__container_type_image">
           <button aria-label="Закрыть" className="popup__button-close" type="button"></button>
