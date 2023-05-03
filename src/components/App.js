@@ -41,68 +41,28 @@ function App() {
       <Header/>
       <Main onCardClick={handleCardClick} onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick}/>
       <Footer/>
-      <PopupWithForm onClose={closeAllPopups} isOpen={isEditProfilePopupOpen} name={`profile`} title={'Редактировать профиль'} children={
+      <PopupWithForm onClose={closeAllPopups} isOpen={isEditProfilePopupOpen} name={`profile`} title={'Редактировать профиль'} action={'Сохранить'} Создать children={
           <>
             <input id="input-name" type="text" name="name" className="popup__input popup__input_type_name" placeholder="Укажите имя" minLength="2" maxLength="40" required/>
             <span id="input-name-error" className="popup__error"></span>
             <input id="input-job" type="text" name="about" className="popup__input popup__input_type_job" placeholder="Укажите професcию" minLength="2" maxLength="200" required/>
-            <span id="input-job-error" className="popup__error"></span>
-            <button className="popup__button popup__button-submit" type="submit">Сохранить</button>
+            <span id="input-job-error" className="popup__error"></span>            
           </>
       }/>    
-      <PopupWithForm onClose={closeAllPopups} isOpen={isAddPlacePopupOpen} name={`place`} title={'Добавить место'} children={
+      <PopupWithForm onClose={closeAllPopups} isOpen={isAddPlacePopupOpen} name={`place`} title={'Добавить место'} action={'Создать'} children={
           <>
             <input id="input-title" type="text" name="title" className="popup__input popup__input_type_title" placeholder="Название" minLength="2" maxLength="30" required/>
             <span id="input-title-error" className="popup__error"></span>
             <input id="input-link" type="url" name="link" className="popup__input popup__input_type_link" placeholder="Ссылка на картинку" required/>
-            <span id="input-link-error" className="popup__error"></span>
-            <button className="popup__button popup__button-submit" type="submit">Создать</button>
+            <span id="input-link-error" className="popup__error"></span>            
           </>
       }/>    
-      <PopupWithForm onClose={closeAllPopups} isOpen={isEditAvatarPopupOpen} name={`avatar`} title={'Изменить аватар'} children={
+      <PopupWithForm onClose={closeAllPopups} isOpen={isEditAvatarPopupOpen} name={`avatar`} title={'Изменить аватар'} action={'Сохранить'} children={
           <>
             <input id="input-avatar" type="url" name="avatar" className="popup__input popup__input_type_avatar" placeholder="Ссылка на картинку" required/>
-            <span id="input-avatar-error" className="popup__error"></span>
-            <button className="popup__button popup__button-submit" type="submit">Сохранить</button>
+            <span id="input-avatar-error" className="popup__error"></span>            
           </>
-      }/>    
-      {/* <div className="popup popup_type_profile">
-        <div className="popup__container">
-          <button aria-label="Закрыть" className="popup__button-close" type="button"></button>
-          <h2 className="popup__title">Редактировать профиль</h2>
-          <form className="popup__form popup__form_type_profile" name="form-profile" noValidate>
-            <input id="input-name" type="text" name="name" className="popup__input popup__input_type_name" placeholder="Укажите имя" minLength="2" maxLength="40" required/>
-            <span id="input-name-error" className="popup__error"></span>
-            <input id="input-job" type="text" name="about" className="popup__input popup__input_type_job" placeholder="Укажите професcию" minLength="2" maxLength="200" required/>
-            <span id="input-job-error" className="popup__error"></span>
-            <button className="popup__button popup__button-submit" type="submit">Сохранить</button>
-          </form>
-        </div>
-      </div>
-      <div className="popup popup_type_place">
-        <div className="popup__container">
-          <button aria-label="Закрыть" className="popup__button-close" type="button"></button>
-          <h2 className="popup__title">Новое место</h2>
-          <form className="popup__form popup__form_type_place" name="form-place" noValidate>
-            <input id="input-title" type="text" name="title" className="popup__input popup__input_type_title" placeholder="Название" minLength="2" maxLength="30" required/>
-            <span id="input-title-error" className="popup__error"></span>
-            <input id="input-link" type="url" name="link" className="popup__input popup__input_type_link" placeholder="Ссылка на картинку" required/>
-            <span id="input-link-error" className="popup__error"></span>
-            <button className="popup__button popup__button-submit" type="submit">Создать</button>
-          </form>
-        </div>
-      </div>
-      <div className="popup popup_type_avatar">
-        <div className="popup__container">
-          <button aria-label="Закрыть" className="popup__button-close" type="button"></button>
-          <h2 className="popup__title">Обновить аватар</h2>
-          <form className="popup__form popup__form_type_avatar" name="form-avatar" noValidate>        
-            <input id="input-avatar" type="url" name="avatar" className="popup__input popup__input_type_avatar" placeholder="Ссылка на картинку" required/>
-            <span id="input-avatar-error" className="popup__error"></span>
-            <button className="popup__button popup__button-submit" type="submit">Сохранить</button>
-          </form>
-        </div>
-      </div> */}
+      }/>
       <div className="popup popup_type_delete-card">
         <div className="popup__container">
           <button aria-label="Закрыть" className="popup__button-close" type="button"></button>
@@ -113,13 +73,7 @@ function App() {
         </div>
       </div>
       <ImagePopup onCardClick={handleCardClick} card={selectedCard} onClose={closeAllPopups} isOpen={isImagePopupOpen} title={`image`}/>
-      {/* <div className="popup popup_type_image">
-        <div className="popup__container popup__container_type_image">
-          <button aria-label="Закрыть" className="popup__button-close" type="button"></button>
-          <img alt="#" className="popup__img" src="#"/>
-          <h2 className="popup__name"></h2>
-        </div>
-      </div> */}
+      
       <template className="template-card">
         <article className="element">
           <button className="element__basket" aria-label="Удалить фото"></button>

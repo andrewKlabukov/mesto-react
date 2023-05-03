@@ -8,6 +8,7 @@ const PopupWithForm = (props)=> {
         <form className="popup__form popup__form_type_profile" name={`form-${props.name}`} noValidate>
           {props.children}          
         </form>
+        <button className="popup__button popup__button-submit" type="submit">{props.action}</button>
       </div>
     </div>
   )
