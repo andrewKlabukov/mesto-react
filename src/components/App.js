@@ -10,7 +10,12 @@ function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
-   
+  const [selectedCard, setSelectedCard] = React.useState({})
+  
+
+  const handleCardClick = (card)=> {
+    console.log(card)
+  }
   const handleEditAvatarClick = ()=> {
     setEditAvatarPopupOpen(true)    
   }
@@ -31,7 +36,7 @@ function App() {
     <>
     <div className="page">
       <Header/>
-      <Main onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick}/>
+      <Main onCardClick={handleCardClick} onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick}/>
       <Footer/>
       <PopupWithForm onClose={closeAllPopups} isOpen={isEditProfilePopupOpen} name={`profile`} title={'Редактировать профиль'} children={
           <>
