@@ -7,22 +7,27 @@ function Card(props) {
   const isOwn = props.card.owner._id === currentUser._id;
   const isLiked = props.card.likes.some(i => i._id === currentUser._id);
   const cardLikeButtonClassName = ( 
-    `element__button ${isLiked && 'element__button_active'}` 
+    `element__button ${isLiked ? 'element__button_active' : ''}` 
   );
-
+  
   function handleCardClick() {
     props.onCardClick(props.card);
+
   }
 
   function handleLikeClick() {
-    props.onCardLike(props.card);
+    props.onCardLike(props.card);   
+  }
+
+  function handleCardDelete() {
+    props.onCardDelete(props.card);
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <article className="element">
         {isOwn && 
-          <button className="element__basket" aria-label="Удалить фото"></button>
+          <button onClick={handleCardDelete} className="element__basket" aria-label="Удалить фото"></button>
         }
         <img onClick={handleCardClick} alt={props.card.name} src={props.card.link} className="element__img" />
         <div className="element__wrap">
