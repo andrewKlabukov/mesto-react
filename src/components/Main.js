@@ -1,38 +1,21 @@
-import React, { useEffect } from 'react';
-import avatarImg from '../images/kusto.jpg';
-import api from '../utils/Api';
+import React, { useContext } from 'react';
 import Card from './Card';
+import { CurrentUserContext } from '../contexts/currentUserContext';
 
 function Main(props) { 
   
-  const [userName, setUserName] = React.useState('');
-  const [userDescription, setUserDescription] = React.useState('');
-  const [userAvatar, setUserAvatar] = React.useState('');
-  const [cards, setCards] = React.useState([]);
-  useEffect(()=>{
-    api.getUserInfo()
-    .then(res => {      
-      setUserName(res.name)
-      setUserDescription(res.about)
-      setUserAvatar(res.avatar)
-    
-    })
-    api.getInitialCards()
-    .then(res=>{      
-      setCards(res)
-    })
-  }, []);
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <main className="main">
       <section className="profile">
         <div className="profile__avatar" onClick={props.onEditAvatar}>
-          <img src={userAvatar} alt="Аватар" className="profile__avatar" id="profile__avatar" />
+          <img src={currentUser.avatar} alt="Аватар" className="profile__avatar" id="profile__avatar" />
         </div>
         <div className="profile-desc">
           <div className="profile-desc__wrap">
-            <h2 className="profile-desc__title">{userName}</h2>
-            <p className="profile-desc__intro">{userDescription}</p>
+            <h2 className="profile-desc__title">{currentUser.name}</h2>
+            <p className="profile-desc__intro">{currentUser.about}</p>
           </div>
           <button onClick={props.onEditProfile} className="profile__edit-buton" type="button" aria-label="Редактировать профиль"></button>
         </div>
@@ -40,8 +23,8 @@ function Main(props) {
         </button>
       </section>
       <section className="elements">
-        {cards.map((card)=>{
-          return <Card onCardClick={props.onCardClick} card={card} key={card._id}/>   
+        {props.cards.map((card)=>{
+          return <Card onCardLike={props.onCardLike} onCardClick={props.onCardClick} card={card} key={card._id}/>   
           
         })}
       </section>
