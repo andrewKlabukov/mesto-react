@@ -14,13 +14,18 @@ function AddPlacePopup(props) {
     setLink(event.target.value)
   }
 
+  function clearForm() {
+    setTitle('');
+    setLink('')
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
     props.onAddNewCard({
       name: title,
       link: link
     })
-
+    clearForm();
   }
 
   return(

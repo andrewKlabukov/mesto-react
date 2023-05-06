@@ -24,7 +24,7 @@ function Card(props) {
   }
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    
       <article className="element">
         {isOwn && 
           <button onClick={handleCardDelete} className="element__basket" aria-label="Удалить фото"></button>
@@ -38,7 +38,7 @@ function Card(props) {
           </div>
         </div>
       </article>
-    </CurrentUserContext.Provider>
+    
   )
 }
 

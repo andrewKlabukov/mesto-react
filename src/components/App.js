@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import api from '../utils/Api';
 import { CurrentUserContext } from "../contexts/currentUserContext";
@@ -36,10 +35,10 @@ function App() {
     setImagePopupOpen(true)
     setSelectedCard(card);    
   }
-  const handleEditAvatarClick = ()=> {
+  const handleEditAvatarClick = ()=> {     
     setEditAvatarPopupOpen(true)      
   }
-  const handleEditProfileClick = ()=> {
+  const handleEditProfileClick = ()=> {    
     setEditProfilePopupOpen(true)
   }
   const handleAddPlaceClick = ()=> {
@@ -59,8 +58,9 @@ function App() {
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.likeCard(card._id, isLiked)
     .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    });
+        setCards((state) => state.map((c) => c._id === card._id ? newCard : c))    
+    })
+    .catch((err) => console.log(err));
 } 
 
   function handleCardDelete(card) {    
@@ -68,22 +68,25 @@ function App() {
     .then(()=> {      
       setCards(cards.filter((item) => item._id !== card._id));      
     })
+    .catch((err) => console.log(err));
   }
 
   function handleUpdateUser(updateUser) {
     api.updateUserInfo(updateUser)
-    .then(res => {
+    .then(res => {      
       setCurrentUser(res);
-      closeAllPopups();
+      closeAllPopups();      
     })
+    .catch((err) => console.log(err))    
   }
 
   function handleUpdateAvatar(updateAvatar) {
     api.updateAvatar(updateAvatar)
-    .then(res => {  
+    .then(res => {      
       setCurrentUser(res)
-      closeAllPopups();
+      closeAllPopups();      
     })
+    .catch((err) => console.log(err));
   }
 
   function handleAddNewCard(newCard) {
@@ -92,6 +95,7 @@ function App() {
       setCards([res, ...cards]);
       closeAllPopups();
     })
+    .catch((err) => console.log(err));
   }
 
   return (
@@ -139,20 +143,6 @@ function App() {
           isOpen={isImagePopupOpen}
           title={`image`}
         />
-
-      <template className="template-card">
-        <article className="element">
-          <button className="element__basket" aria-label="Удалить фото"></button>
-            <img alt="#" className="element__img" />
-          <div className="element__wrap">
-            <h2 className="element__title"></h2>
-            <div className="element__wrap-like">
-              <button className="element__button" aria-label="Поставить лайк"></button>
-              <span className="element__button-counter"></span>
-            </div>
-          </div>
-        </article>
-      </template>
 </div>
     </CurrentUserContext.Provider>
   );
