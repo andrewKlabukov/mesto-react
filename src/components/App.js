@@ -8,6 +8,7 @@ import api from '../utils/Api';
 import { CurrentUserContext } from "../contexts/currentUserContext";
 import  EditProfilePopup from "./EditProfilePopup"
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
 
@@ -36,7 +37,7 @@ function App() {
     setSelectedCard(card);    
   }
   const handleEditAvatarClick = ()=> {
-    setEditAvatarPopupOpen(true)    
+    setEditAvatarPopupOpen(true)      
   }
   const handleEditProfileClick = ()=> {
     setEditProfilePopupOpen(true)
@@ -54,8 +55,7 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-    console.log(123)
+    const isLiked = card.likes.some(i => i._id === currentUser._id);    
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.likeCard(card._id, isLiked)
     .then((newCard) => {
@@ -63,9 +63,11 @@ function App() {
     });
 } 
 
-  function handleCardDelete(card) {
-    console.log('delete');
+  function handleCardDelete(card) {    
     api.delCard(card._id)
+    .then(()=> {      
+      setCards(cards.filter((item) => item._id !== card._id));      
+    })
   }
 
   function handleUpdateUser(updateUser) {
@@ -78,8 +80,17 @@ function App() {
 
   function handleUpdateAvatar(updateAvatar) {
     api.updateAvatar(updateAvatar)
+    .then(res => {  
+      setCurrentUser(res)
+      closeAllPopups();
+    })
+  }
+
+  function handleAddNewCard(newCard) {
+    api.addNewCard(newCard)
     .then(res => {
-      console.log(res)
+      setCards([res, ...cards]);
+      closeAllPopups();
     })
   }
 
@@ -87,28 +98,30 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
         <Header />
-        <Main onCardDelete={handleCardDelete} onCardLike={handleCardLike} onCardClick={handleCardClick} onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} cards={cards} />
+        <Main 
+          onCardDelete={handleCardDelete}
+          onCardLike={handleCardLike}
+          onCardClick={handleCardClick}
+          onEditAvatar={handleEditAvatarClick}
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          cards={cards}
+        />
         <Footer />
         <EditProfilePopup
           closeAllPopups={closeAllPopups}
           isEditProfilePopupOpen={isEditProfilePopupOpen}
           onUpdateUser={handleUpdateUser}
         />
-        <PopupWithForm onClose={closeAllPopups} isOpen={isAddPlacePopupOpen} name={`place`} title={'Добавить место'} action={'Создать'} children={
-          <>
-            <input id="input-title" type="text" name="title" className="popup__input popup__input_type_title" placeholder="Название" minLength="2" maxLength="30" required />
-            <span id="input-title-error" className="popup__error"></span>
-            <input id="input-link" type="url" name="link" className="popup__input popup__input_type_link" placeholder="Ссылка на картинку" required />
-            <span id="input-link-error" className="popup__error"></span>
-          </>
-        } />
+        < AddPlacePopup
+          closeAllPopups={closeAllPopups}
+          isAddPlacePopupOpen={isAddPlacePopupOpen}
+          onAddNewCard={handleAddNewCard}
+        />
         <EditAvatarPopup
-          onClose={closeAllPopups}
-          isOpen={isEditAvatarPopupOpen}
-          name={`avatar`}
-          title={'Изменить аватар'}
-          action={'Сохранить'}
-          onUpdateUser={handleUpdateAvatar}      
+          closeAllPopups={closeAllPopups}
+          isEditAvatarPopupOpen={isEditAvatarPopupOpen}          
+          onUpdateAvatar={handleUpdateAvatar}      
         />
       <div className="popup popup_type_delete-card">
         <div className="popup__container">
@@ -119,7 +132,13 @@ function App() {
           </form>
         </div>
       </div>
-        <ImagePopup onCardClick={handleCardClick} card={selectedCard} onClose={closeAllPopups} isOpen={isImagePopupOpen} title={`image`} />
+        <ImagePopup
+          onCardClick={handleCardClick}
+          card={selectedCard}
+          onClose={closeAllPopups}
+          isOpen={isImagePopupOpen}
+          title={`image`}
+        />
 
       <template className="template-card">
         <article className="element">

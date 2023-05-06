@@ -26,12 +26,12 @@ function EditProfilePopup(props) {
 
   return(
     <PopupWithForm 
-    onSubmit={handleSubmit} 
-    onClose={props.closeAllPopups}
-    isOpen={props.isEditProfilePopupOpen}
-    name={`profile`}
-    title={'Редактировать профиль'}
-    action={'Сохранить'}
+      onSubmit={handleSubmit} 
+      onClose={props.closeAllPopups}
+      isOpen={props.isEditProfilePopupOpen}
+      name={`profile`}
+      title={'Редактировать профиль'}
+      action={'Сохранить'}
     >
       <input onChange={handleChangeName} value={name} id="input-name" type="text" name="name" className="popup__input popup__input_type_name" placeholder="Укажите имя" minLength="2" maxLength="40" required />
       <span id="input-name-error" className="popup__error"></span>
