@@ -1,5 +1,5 @@
 import PopupWithForm from "./PopupWithForm"
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 function AddPlacePopup(props) {
 
@@ -14,19 +14,18 @@ function AddPlacePopup(props) {
     setLink(event.target.value)
   }
 
-  function clearForm() {
-    setTitle('');
-    setLink('')
-  }
-
   function handleSubmit(event) {
     event.preventDefault();
     props.onAddNewCard({
       name: title,
       link: link
-    })
-    clearForm();
+    })    
   }
+
+  React.useEffect(() => {
+    setTitle('');
+    setLink('');
+  }, [props.isAddPlacePopupOpen])
 
   return(
     <PopupWithForm

@@ -17,17 +17,19 @@ function App() {
   const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
-  const [cards, setCards] = React.useState([]); 
-
+  const [cards, setCards] = React.useState([]);
+         
   useEffect(()=>{
     api.getUserInfo()
     .then(res => {
       setCurrentUser(res)
     })
+    .catch((err) => console.log(err));
     api.getInitialCards()
     .then(res => {
       setCards(res)
     })
+    .catch((err) => console.log(err));
   }, [])
   
 
@@ -36,13 +38,14 @@ function App() {
     setSelectedCard(card);    
   }
   const handleEditAvatarClick = ()=> {     
-    setEditAvatarPopupOpen(true)      
+    setEditAvatarPopupOpen(true)
+    
   }
   const handleEditProfileClick = ()=> {    
-    setEditProfilePopupOpen(true)
+    setEditProfilePopupOpen(true)    
   }
   const handleAddPlaceClick = ()=> {
-    setAddPlacePopupOpen(true)
+    setAddPlacePopupOpen(true)    
   }
 
   const closeAllPopups = ()=> {
@@ -71,7 +74,7 @@ function App() {
     .catch((err) => console.log(err));
   }
 
-  function handleUpdateUser(updateUser) {
+  function handleUpdateUser(updateUser) {    
     api.updateUserInfo(updateUser)
     .then(res => {      
       setCurrentUser(res);
@@ -108,7 +111,7 @@ function App() {
           onCardClick={handleCardClick}
           onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
+          onAddPlace={handleAddPlaceClick}                 
           cards={cards}
         />
         <Footer />
