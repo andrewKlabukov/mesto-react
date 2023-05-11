@@ -18,7 +18,7 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
-         
+             
   useEffect(()=>{
     api.getUserInfo()
     .then(res => {
@@ -38,8 +38,7 @@ function App() {
     setSelectedCard(card);    
   }
   const handleEditAvatarClick = ()=> {     
-    setEditAvatarPopupOpen(true)
-    
+    setEditAvatarPopupOpen(true)    
   }
   const handleEditProfileClick = ()=> {    
     setEditProfilePopupOpen(true)    
@@ -99,7 +98,7 @@ function App() {
       closeAllPopups();
     })
     .catch((err) => console.log(err));
-  }
+  }  
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -119,6 +118,7 @@ function App() {
           closeAllPopups={closeAllPopups}
           isEditProfilePopupOpen={isEditProfilePopupOpen}
           onUpdateUser={handleUpdateUser}
+          currentUser={currentUser}             
         />
         < AddPlacePopup
           closeAllPopups={closeAllPopups}
