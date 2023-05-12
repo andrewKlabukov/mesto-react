@@ -8,6 +8,7 @@ import { CurrentUserContext } from "../contexts/currentUserContext";
 import  EditProfilePopup from "./EditProfilePopup"
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
+import DeletePlacePopup from "./DeletePlacePopup";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
+  const [isDeleteCard, setDeleteCard] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
@@ -45,6 +47,10 @@ function App() {
   }
   const handleAddPlaceClick = ()=> {
     setAddPlacePopupOpen(true)    
+  }
+
+  const handleDeleteCard = ()=> {
+    setDeleteCard(true)    
   }
 
   const closeAllPopups = ()=> {
@@ -130,15 +136,10 @@ function App() {
           isEditAvatarPopupOpen={isEditAvatarPopupOpen}          
           onUpdateAvatar={handleUpdateAvatar}      
         />
-      <div className="popup popup_type_delete-card">
-        <div className="popup__container">
-          <button aria-label="Закрыть" className="popup__button-close" type="button"></button>
-          <h2 className="popup__title">Вы уверены</h2>
-          <form className="popup__form popup__form_type_place" name="form-place" noValidate>
-            <button className="popup__button popup__button-submit" type="submit">Да</button>
-          </form>
-        </div>
-      </div>
+        <DeletePlacePopup
+          isOpen={handleDeleteCard}
+        />
+
         <ImagePopup
           onCardClick={handleCardClick}
           card={selectedCard}
