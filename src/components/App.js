@@ -50,8 +50,8 @@ function App() {
   const closeAllPopups = ()=> {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
-    setAddPlacePopupOpen(false);   ;
-    setImagePopupOpen(false);   ;
+    setAddPlacePopupOpen(false);
+    setImagePopupOpen(false);
   }
 
   function handleCardLike(card) {
