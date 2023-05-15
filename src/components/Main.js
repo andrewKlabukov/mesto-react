@@ -3,6 +3,7 @@ import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Main(props) {
+<<<<<<< HEAD
   const {
     onEditProfile,
     onAddPlace,
@@ -14,6 +15,11 @@ function Main(props) {
   } = props;
 
   const currentUser = React.useContext(CurrentUserContext);
+=======
+    
+  const currentUser = useContext(CurrentUserContext);
+>>>>>>> b6dfb0901bb5bc2d55476775daa12f4ff40abdbd
+
 
   return (
     <main className="content">

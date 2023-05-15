@@ -26,6 +26,7 @@ function Card(props) {
   }
 
   return (
+<<<<<<< HEAD
     <li className="card" aria-label={card.name}>
       <img
         loading="lazy"
@@ -58,6 +59,24 @@ function Card(props) {
         ></button>
     </li>
   );
+=======
+    
+      <article className="element">
+        {isOwn && 
+          <button onClick={handleCardDelete} className="element__basket" aria-label="Удалить фото"></button>
+        }
+        <img onClick={handleCardClick} alt={props.card.name} src={props.card.link} className="element__img" />
+        <div className="element__wrap">
+          <h2 className="element__title">{props.card.name}</h2>
+          <div className="element__wrap-like">
+            <button onClick={handleLikeClick} className={cardLikeButtonClassName} aria-label="Поставить лайк"></button>
+            <span className="element__button-counter">{props.card.likes.length}</span>
+          </div>
+        </div>
+      </article>
+    
+  )
+>>>>>>> b6dfb0901bb5bc2d55476775daa12f4ff40abdbd
 }
 
 export default Card;
