@@ -1,9 +1,17 @@
-function Footer() {
+import React from "react";
+
+function Footer({ loggedIn }) { 
+
   return (
-    <footer className="footer">
-      <span className="footer__span"> &#169; 2020 Mesto Russia</span>
+    <footer className={loggedIn ? "footer" : "footer_invisible"}>
+      <p className="footer__copyright">
+        &copy; 2023 Mesto Russia
+      </p>
+      <p className="footer__text">
+        Andrew Klabukov                
+      </p>
     </footer>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

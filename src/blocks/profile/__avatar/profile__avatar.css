@@ -1,31 +1,11 @@
 .profile__avatar {
-  width: 120px;
+  background-image: url(../../../images/pencil.svg);
+  background-color: #000;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 26px;
   height: 120px;
+  width: 120px;
+  border: none;
   border-radius: 50%;
-  object-fit: cover;
-  cursor: pointer;
-  position: relative;
-  transition: opacity .5s ease;
-}
-
-.profile__avatar::before {
-  content: url(../../../images/EditProfile.svg);
-  width: 120px;
-  height: 120px;
-  color: aliceblue;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: opacity .5s ease;
-}
-
-.profile__avatar:hover::before {
-  background-color: black;
-  opacity: .8;
-  transition: opacity .5s ease;
 }
